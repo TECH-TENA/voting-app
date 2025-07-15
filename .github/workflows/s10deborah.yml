@@ -1,0 +1,37 @@
+name: Deploy Docker Compose App
+
+on:
+  push:
+    branches:
+      - feature/voting-app
+
+jobs:
+  deploy:
+    name: Build and Deploy Compose Stack
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v3
+
+    - name: Install Docker Compose
+      run: |
+        sudo apt update
+        sudo apt install -y docker-compose
+
+    - name: Build and Run Compose Stack
+      run: |
+        docker-compose down
+        docker-compose build
+        docker-compose up -d
+
+    - name: Label Running Container
+      run: |
+        CONTAINER_ID=$(docker ps -q)
+        if [ ! -z "$CONTAINER_ID" ]; then
+          docker container update --label s11 $CONTAINER_ID
+        fi
+
