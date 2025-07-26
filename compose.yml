@@ -22,23 +22,31 @@ services:
       - backend
 
   vote:
-    image: dockersamples/examplevotingapp_vote
+    build:
+      context: .
+      dockerfile: Dockerfile  # Make sure the Dockerfile is in root with app.py
     ports:
-      - 8080:80
+      - 8080:5000
     networks:
       - frontend
-        #deploy:
-      # replicas: 2
+    depends_on:
+      - redis
 
   result:
-    image: dockersamples/examplevotingapp_result
+    build:
+      context: .
+      dockerfile: Dockerfile  # Make sure this builds the Node.js app
     ports:
-      - 8081:80
+      - 8081:3000
     networks:
       - backend
+    depends_on:
+      - db
 
   worker:
-    image: dockersamples/examplevotingapp_worker
+    build:
+      context: ./worker
+      dockerfile: Dockerfile  # Inside ./worker folder
     networks:
       - frontend
       - backend
