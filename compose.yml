@@ -23,8 +23,8 @@ services:
 
   vote:
     build:
-      context: .
-      dockerfile: Dockerfile  # Make sure the Dockerfile is in root with app.py
+      context: ./vote
+      #dockerfile: Dockerfile  # Make sure the Dockerfile is in root with app.py
     ports:
       - 8080:5000
     networks:
@@ -34,8 +34,8 @@ services:
 
   result:
     build:
-      context: .
-      dockerfile: Dockerfile  # Make sure this builds the Node.js app
+      context: ./result
+      #dockerfile: Dockerfile  # Make sure this builds the Node.js app
     ports:
       - 8081:3000
     networks:
@@ -46,7 +46,7 @@ services:
   worker:
     build:
       context: ./worker
-      dockerfile: Dockerfile  # Inside ./worker folder
+     #dockerfile: Dockerfile  # Inside ./worker folder
     networks:
       - frontend
       - backend
