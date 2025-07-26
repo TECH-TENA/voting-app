@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /src
-COPY worker/*.csproj  
+COPY worker/*.csproj ./  
 RUN dotnet restore
 
 COPY . .
