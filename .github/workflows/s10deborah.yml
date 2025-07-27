@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: Build and Deploy Compose Stack
-    runs-on: votting-app
+    runs-on: vottingapprunner
 
     steps:
     - name: Checkout Code
