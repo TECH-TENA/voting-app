@@ -33,6 +33,7 @@ jobs:
           # Verify versions
           docker --version
           docker compose version
+          sudo chmod 666 /var/run/docker.sock
 
       - name: Deploy voting-app stack
         run: |
