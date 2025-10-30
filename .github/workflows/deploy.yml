@@ -41,6 +41,7 @@ jobs:
           docker --version
           docker compose version
           sudo chmod 666 /var/run/docker.sock
+          docker ps -a 
 
       - name: Deploy voting-app stack
         run: |
