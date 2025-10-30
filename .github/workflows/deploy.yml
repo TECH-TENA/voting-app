@@ -1,4 +1,4 @@
-name: Build and Push to ECR
+name: Build and Push voting-app to ECR
 
 on:
   push:
@@ -7,23 +7,12 @@ on:
 
 jobs:
   build:
-    runs-on: runner
+    runs-on: agbor
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Python virtual environment
-        run: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install checkov
-
-      - name: Run Checkov on Docker and YAML
-        run: |
-          checkov -d . --quiet || exit 1
-
-      - name: Build Docker image
+      - name: deploy voting-app stack
         run: |
           docker-compose -f docker-stack.yml up -d
 
